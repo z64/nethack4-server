@@ -11,22 +11,23 @@ RUN apt-get update \
     zlib1g-dev \
     build-essential
 
+
+# Setup user and folder
+RUN useradd nethack
+RUN mkdir /opt/nethack4
+
 # Download and extract source
 RUN wget http://nethack4.org./media/releases/nethack4-4.3-beta2.tar.gz -O /tmp/nethack4.tar.gz \
- && tar -xvf /tmp/nethack4.tar.gz -C /tmp
-WORKDIR /tmp/nethack4-4.3-beta2
+ && tar -xvf /tmp/nethack4.tar.gz -C /opt/nethack4 --strip-components=1
 
-# Build server
-RUN useradd -m nethack
-RUN chmod +x ./aimake
-RUN mkdir /opt/nethack4 \
- && chown nethack /opt/nethack4
-
+# Build executables
+RUN chown nethack /opt/nethack4
+WORKDIR /opt/nethack4
 USER nethack
 RUN mkdir build \
- && mkdir install \
+ && mkdir bin \
  && cd build \
- && ../aimake -i ../install \
+ && ../aimake -i ../bin \
     --with=server \
     --with=jansson \
     --without=gui \
@@ -35,3 +36,5 @@ RUN mkdir build \
     --without=rltiles_tiles \
     --v \
     ; exit 0
+
+ENTRYPOINT ["/opt/nethack4/bin/nethack4-server"]
