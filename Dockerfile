@@ -7,7 +7,8 @@ RUN apt-get update \
     libperl4-corelibs-perl \
     flex \
     bison \
-    libghc-postgresql-libpq-dev \
+    libpq-dev \
+    zlib1g-dev \
     build-essential
 
 # Download and extract source
