@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  nethack4-server:
+    build: ./nethack4-server/
+    depends_on:
+      - db
+    ports:
+      - 53430:53430
+  db:
+    build: ./db/
+    volumes:
+      - ./.data/var/lib/postgresql/data
+  dev:
+    image: debian:jessie-slim
+

@@ -9,8 +9,8 @@ RUN apt-get update \
     bison \
     libpq-dev \
     zlib1g-dev \
-    build-essential
-
+    build-essential \
+    socat
 
 # Setup user and folder
 RUN useradd nethack
@@ -37,4 +37,8 @@ RUN mkdir build \
     --v \
     ; exit 0
 
-ENTRYPOINT ["/opt/nethack4/bin/nethack4-server"]
+COPY ./nethack4.conf /opt/nethack4/bin/
+
+EXPOSE 53430
+
+ENTRYPOINT ["socat", "TCP4-LISTEN:53430,fork", "EXEC:'/opt/nethack4/bin/nethack4-server -c /opt/nethack4/bin/nethack4.conf"]
