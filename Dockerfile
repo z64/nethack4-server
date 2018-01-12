@@ -17,7 +17,7 @@ RUN wget http://nethack4.org./media/releases/nethack4-4.3-beta2.tar.gz -O /tmp/n
 WORKDIR /tmp/nethack4-4.3-beta2
 
 # Build server
-RUN adduser nethack
+RUN useradd nethack
 RUN chmod +x ./aimake
 USER nethack
 RUN mkdir build \
