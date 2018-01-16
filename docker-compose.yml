@@ -10,7 +10,4 @@ services:
   db:
     build: ./db/
     volumes:
-      - ./.data/var/lib/postgresql/data
-  dev:
-    image: debian:jessie-slim
-
+      - ./.data:/var/lib/postgresql/data

@@ -41,4 +41,4 @@ COPY ./nethack4.conf /opt/nethack4/bin/
 
 EXPOSE 53430
 
-ENTRYPOINT ["socat", "TCP4-LISTEN:53430,fork", "EXEC:'/opt/nethack4/bin/nethack4-server -c /opt/nethack4/bin/nethack4.conf"]
+ENTRYPOINT ["socat", "TCP4-LISTEN:53430,fork", "EXEC:'/opt/nethack4/bin/nethack4-server -c /opt/nethack4/bin/nethack4.conf'"]
