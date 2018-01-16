@@ -38,6 +38,7 @@ RUN mkdir build \
     ; exit 0
 
 COPY ./nethack4.conf /opt/nethack4/bin/
+USER root
 
 EXPOSE 53430
 
